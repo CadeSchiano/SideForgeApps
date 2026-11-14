@@ -1,10 +1,8 @@
 # SideForgeApps
 
-A standalone, dependency-free business website for Cade Schiano, with two fictional responsive concept demos. This repository does not modify the personal portfolio.
+A static, dependency-free site for Cade Schiano with two clearly labeled fictional concept demos. The separate personal portfolio stays at https://cadeschiano.github.io/portfolio/.
 
-## Preview locally
-
-From this directory, with Python 3 installed:
+## Local preview
 
 ```sh
 python3 scripts/build.py
@@ -12,30 +10,18 @@ python3 scripts/check.py
 python3 -m http.server 8000 --directory dist
 ```
 
-Open http://localhost:8000. Stop the server with Ctrl+C. There is no package installation or JavaScript build step.
+Open http://localhost:8000/. Stop the server with Ctrl+C. The relative asset and demo links also work at the case-sensitive GitHub Pages path, `https://cadeschiano.github.io/SideForgeApps/`.
 
 ## Edit
 
-- `index.html`: main copy, $500 pricing, scope, payment terms, and email links. Search for `mailto:` when updating the email; there are six links.
-- `assets/style.css`: shared layout, colors, responsive rules, and focus states.
-- `demos/fieldstone.html` and `demos/oak-and-thread.html`: concept pages.
-- `assets/lawn.svg` and `assets/gifts.svg`: lightweight local illustrations used in both demos and main-page previews.
-- `assets/main.js`: current copyright year. All content and navigation work without JavaScript.
+Edit copy, $500 pricing, and email links in `index.html`; demo content in `demos/`; colors and responsive layouts in `assets/style.css`. `assets/main.js` updates the copyright year and handles copying the business email. Re-run the build after changes. The generated `dist/` is ignored by Git.
 
-Run the build again after editing; `dist/` is generated. No analytics, remote assets, forms, backend, or secrets are required. Email buttons open the visitor's mail application, and the email is also displayed for copying.
+The Fieldstone demo uses one locally saved sample photo. `assets/lawn-mowing.jpg` is [a photo by Gustavo Fring on Pexels](https://www.pexels.com/photo/man-mowing-the-lawn-5163424/) under the [Pexels License](https://www.pexels.com/license/). It illustrates a service type and is not Fieldstone client work. Other images are original local concept illustrations.
 
-## Deploy
+## Deployment
 
-No deployment is configured or performed. The ready-to-upload website is in `dist/`.
+This repository's remote points to `CadeSchiano/SideForgeApps`. Publishing is not configured in this checkout. To deploy with GitHub Pages, copy the **contents** of `dist/` to a dedicated publishing branch, push it, and select that branch with `/ (root)` in Settings → Pages. Keep `assets/` and `demos/` beside `index.html`. Do not alter the separate `portfolio` repository. The public URL responded with HTTP 200 during development, but these local changes are not live until published.
 
-The simplest launch path is to upload **the contents of `dist/`** to your static host's public directory. Keep `assets/` and `demos/` beside `index.html`. Relative links support either a domain root or a subdirectory such as `/BusinessPortfolio/`.
+## Checks
 
-For GitHub Pages on this separate `BusinessPortfolio` repository: copy the contents of `dist/` to a publishing branch, push that branch, then choose it with the `/ (root)` folder in **Settings → Pages → Deploy from a branch**. Do not change the separate personal portfolio repository or its Pages settings. No domain purchase is needed to use a host-provided address. Hosting terms and fees must be checked with the selected provider.
-
-Once the public deployment URL is confirmed, add canonical and `og:url` tags to the three HTML pages using their individual public URLs, then rebuild and upload. No production URL has been invented.
-
-## Validation
-
-`python3 scripts/check.py` checks all three built pages for local file links, section anchors, SVG validity, image dimensions and alt attributes, basic metadata, semantic landmarks, and all six business email CTAs. It also disallows forms and unexpected external assets.
-
-**Remaining prelaunch check:** browser access was unavailable in the implementation session, so rendered visual verification could not be performed. Open the main page and both demos at **375px, 768px, and desktop widths**, checking overflow, text readability, preview composition, and keyboard focus. Click both demo links and return links; test the email CTA with a configured mail application. These checks are not replaced by the static check script.
+`python3 scripts/check.py` validates built links and anchors, metadata, SVGs, semantic landmarks, email CTAs, and absence of forms. Browser-based responsive and clipboard checks should be completed at 375px, 768px, and desktop widths before publishing.
